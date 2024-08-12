@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Sentiment Analysis{% endblock %}
+
+{% block content %}
+<h1>Sentiment Analysis</h1>
+<form action="/analyze" method="POST">
+    <textarea name="text" rows="4" placeholder="Enter text for sentiment analysis...">{{ text if text else '' }}</textarea>
+    <button type="submit">Analyze</button>
+</form>
+{% if sentiment %}
+<div class="results">
+    <h2>Results:</h2>
+    <p><strong>Positive:</strong> {{ sentiment['pos'] }}</p>
+    <p><strong>Neutral:</strong> {{ sentiment['neu'] }}</p>
+    <p><strong>Negative:</strong> {{ sentiment['neg'] }}</p>
+    <p><strong>Compound:</strong> {{ sentiment['compound'] }}</p>
+    <p><strong>Sentiment:</strong> {{ emoji }}</p>
+</div>
+{% endif %}
+{% endblock %}
