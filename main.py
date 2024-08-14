@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, jsonify, url_for
 import pickle
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import random
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -9,19 +10,27 @@ app = Flask(__name__)
 with open('sia.pkl', 'rb') as file:
     sia = pickle.load(file)
 
-# Define a function to map compound score to emoji
+# Define lists of emojis for positive and negative sentiments
+positive_emojis = ["😁", "😊", "😃", "😄", "😍", "🤩", "😘"]
+neutral_emojis = ["😐"]
+negative_emojis = ["☹️", "😭", "😡", "😢", "😞", "🤬"]
+
+
+# Define a function to map compound score to a random emoji
 def get_sentiment_emoji(compound_score):
     if compound_score >= 0.05:
-        return "😊"  # Positive sentiment
+        return random.choice(positive_emojis)  # Random positive emoji
     elif compound_score <= -0.05:
-        return "😠"  # Negative sentiment
+        return random.choice(negative_emojis)  # Random negative emoji
     else:
-        return "😐"  # Neutral sentiment
+        return random.choice(neutral_emojis)  # Neutral emoji
+
 
 # Define the route for the home page (Sentiment Analysis)
 @app.route('/')
 def home():
     return render_template('index.html')
+
 
 # Define a route for sentiment analysis
 @app.route('/analyze', methods=['POST'])
@@ -34,8 +43,9 @@ def analyze_sentiment():
     # Get the appropriate emoji for the sentiment
     sentiment_emoji = get_sentiment_emoji(sentiment_scores['compound'])
 
-    # Return the results to the template along with the images
+    # Return the results to the template along with the images, with increased emoji size
     return render_template('index.html', text=text, sentiment=sentiment_scores, emoji=sentiment_emoji)
+
 
 # Define a route for EDA (Exploratory Data Analysis)
 @app.route('/eda')
@@ -48,6 +58,7 @@ def eda():
     ]
 
     return render_template('eda.html', images=images)
+
 
 # Run the Flask app
 if __name__ == '__main__':

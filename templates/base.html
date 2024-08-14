@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background: url("{{ url_for('static', filename='image/background.PNG') }}") no-repeat center center fixed;
+            background-size: cover;
         }
         .navbar {
-            background-color: #333;
+            background-color: #002f6c;
             overflow: hidden;
+            padding: 10px;
+        }
+        .navbar img {
+            height: 50px;
+            float: left;
+            margin-right: 20px;
         }
         .navbar a {
             float: left;
@@ -24,27 +31,29 @@
             text-decoration: none;
         }
         .navbar a:hover {
-            background-color: #ddd;
-            color: black;
+            background-color: #ff0000;
+            color: white;
         }
-        .container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* Make the card background semi-transparent */
+            border-radius: 15px;
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0;
         }
     </style>
 </head>
 <body>
     <div class="navbar">
+        <img src="{{ url_for('static', filename='image/psg.jpg') }}" alt="PSG Logo">
         <a href="{{ url_for('home') }}">Sentiment Analysis</a>
         <a href="{{ url_for('eda') }}">EDA</a>
     </div>
     <div class="container">
         {% block content %}{% endblock %}
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -2,13 +2,104 @@
 
 {% block title %}EDA (Exploratory Data Analysis){% endblock %}
 
+{% block sidebar %}
+    <h4 class="text-center">Menu</h4>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" href="#rating-distribution">Rating Distribution</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#source-distribution">Source Distribution</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#day-distribution">Day of the Week Distribution</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#positive-word-cloud">Positive Sentiment Word Cloud</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#negative-word-cloud">Negative Sentiment Word Cloud</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#neutral-word-cloud">Neutral Sentiment Word Cloud</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#overall-sentiment">Overall Sentiment Distribution</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#overall-distribution">Overall Distribution</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#missing-values">Missing Values Distribution</a>
+        </li>
+    </ul>
+{% endblock %}
+
 {% block content %}
-<h1>Exploratory Data Analysis</h1>
-<div class="visualizations">
-    {% for image in images %}
-    <div>
-        <img src="{{ url_for('static', filename='image/' + image) }}" alt="Visualization" style="width:100%; margin-bottom: 20px;">
+    <div class="container-fluid">
+        <h1 class="text-center mb-4">Exploratory Data Analysis</h1>
+
+        <!-- Rating Distribution -->
+        <div id="rating-distribution" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Rating Distribution</h5>
+            <img src="{{ url_for('static', filename='image/rating_dis.PNG') }}" alt="Rating Distribution" class="img-fluid">
+            <p class="mt-3">This chart displays the distribution of ratings across different levels, helping us understand customer satisfaction.</p>
+        </div>
+
+        <!-- Source Distribution -->
+        <div id="source-distribution" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Source Distribution</h5>
+            <img src="{{ url_for('static', filename='image/source_dis.PNG') }}" alt="Source Distribution" class="img-fluid">
+            <p class="mt-3">This visualization shows where the reviews are coming from, helping identify the most active review platforms.</p>
+        </div>
+
+        <!-- Day of the Week Distribution -->
+        <div id="day-distribution" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Day of the Week Distribution</h5>
+            <img src="{{ url_for('static', filename='image/day.PNG') }}" alt="Day of the Week Distribution" class="img-fluid">
+            <p class="mt-3">This chart illustrates how customer reviews are distributed across different days of the week.</p>
+        </div>
+
+        <!-- Positive Sentiment Word Cloud -->
+        <div id="positive-word-cloud" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Positive Sentiment Word Cloud</h5>
+            <img src="{{ url_for('static', filename='image/positive.png') }}" alt="Positive Sentiment Word Cloud" class="img-fluid">
+            <p class="mt-3">This word cloud highlights the most frequently mentioned positive aspects in customer reviews.</p>
+        </div>
+
+        <!-- Negative Sentiment Word Cloud -->
+        <div id="negative-word-cloud" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Negative Sentiment Word Cloud</h5>
+            <img src="{{ url_for('static', filename='image/negative.png') }}" alt="Negative Sentiment Word Cloud" class="img-fluid">
+            <p class="mt-3">This word cloud visualizes common issues or complaints that customers have mentioned in their reviews.</p>
+        </div>
+
+        <!-- Neutral Sentiment Word Cloud -->
+        <div id="neutral-word-cloud" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Neutral Sentiment Word Cloud</h5>
+            <img src="{{ url_for('static', filename='image/neutral.PNG') }}" alt="Neutral Sentiment Word Cloud" class="img-fluid">
+            <p class="mt-3">This word cloud represents common terms found in reviews that are neither particularly positive nor negative.</p>
+        </div>
+
+        <!-- Overall Sentiment Distribution -->
+        <div id="overall-sentiment" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Overall Sentiment Distribution</h5>
+            <img src="{{ url_for('static', filename='image/sentiment.png') }}" alt="Overall Sentiment Distribution" class="img-fluid">
+            <p class="mt-3">This chart shows the general sentiment trend in customer reviews by displaying the distribution of positive, neutral, and negative sentiments.</p>
+        </div>
+
+        <!-- Overall Distribution -->
+        <div id="overall-distribution" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Overall Distribution</h5>
+            <img src="{{ url_for('static', filename='image/dis.PNG') }}" alt="Overall Distribution" class="img-fluid">
+            <p class="mt-3">This visualization provides an overall summary of a key metric in the dataset, offering a high-level overview.</p>
+        </div>
+
+        <!-- Missing Values Distribution -->
+        <div id="missing-values" class="mb-5 p-3 border rounded bg-white shadow-sm">
+            <h5 class="mb-3">Distribution of Missing Values</h5>
+            <img src="{{ url_for('static', filename='image/missing_value.png') }}" alt="Distribution of Missing Values" class="img-fluid">
+            <p class="mt-3">This chart identifies which fields in the dataset have the most missing values, aiding in data cleaning efforts.</p>
+        </div>
     </div>
-    {% endfor %}
-</div>
 {% endblock %}
