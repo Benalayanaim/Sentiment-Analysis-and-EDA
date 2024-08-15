@@ -2,8 +2,9 @@
 
 {% block title %}Sentiment Analysis of Real-time PSG Product Reviews{% endblock %}
 
-{% block sidebar %}
-    <a href="#analyze">Analyze Sentiment</a>
+{% block background_style %}
+background: url("{{ url_for('static', filename='image/background.PNG') }}") no-repeat center center fixed;
+background-size: cover;
 {% endblock %}
 
 {% block content %}

@@ -9,49 +9,100 @@
         body {
             font-family: 'Roboto', sans-serif;
             color: #333;
-            background: url("{{ url_for('static', filename='image/background.PNG') }}") no-repeat center center fixed;
-            background-size: cover;
+            {% block background_style %}{% endblock %}
         }
         .navbar {
-            background-color: #002f6c;
-            overflow: hidden;
-            padding: 10px;
+            background-color: #002f6c; /* Blue color for the navbar */
+            padding: 10px 20px; /* Added horizontal padding */
+            display: flex; /* Use Flexbox for alignment */
+            align-items: center; /* Vertically center the items */
+            justify-content: space-between; /* Space between logo and links */
         }
         .navbar img {
-            height: 50px;
-            float: left;
-            margin-right: 20px;
+            height: 50px; /* Size of the logo */
+        }
+        .navbar-links {
+            display: flex; /* Flex container for the links */
         }
         .navbar a {
-            float: left;
-            display: block;
             color: white;
             text-align: center;
             padding: 14px 20px;
             text-decoration: none;
+            font-size: 18px; /* Increased font size for better visibility */
         }
         .navbar a:hover {
             background-color: #ff0000;
             color: white;
+            border-radius: 5px; /* Slightly rounded corners on hover */
         }
-        .card {
-            background-color: rgba(255, 255, 255, 0.8); /* Make the card background semi-transparent */
-            border-radius: 15px;
+        .sidebar {
+            position: fixed;
+            top: 75px; /* Adjusted to match the increased navbar height */
+            left: 0;
+            width: 200px;
+            padding-top: 20px;
+            padding-left: 10px;
+            background-color: #002f6c; /* Blue color matching the top bar */
+            color: white; /* White text color to match */
+            height: calc(100% - 70px); /* Ensure the sidebar takes up the full height minus the navbar */
+            overflow-y: auto; /* Add scrollbar if content overflows */
         }
-        .card-header {
-            border-radius: 15px 15px 0 0;
+        .list-group-item {
+            background-color: transparent;
+            color: white;
+            border: none; /* Remove borders */
+            padding: 10px 15px; /* Adjust padding for better spacing */
+        }
+        .list-group-item:hover {
+            background-color: #ff0000; /* Red hover color matching the navbar links */
+            border-radius: 5px; /* Rounded corners on hover */
+        }
+        .content {
+            margin-left: 220px; /* Adjust for sidebar space */
+            padding: 20px;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                margin-bottom: 20px;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar-links {
+                width: 100%;
+                justify-content: space-around;
+            }
         }
     </style>
 </head>
 <body>
     <div class="navbar">
         <img src="{{ url_for('static', filename='image/psg.jpg') }}" alt="PSG Logo">
-        <a href="{{ url_for('home') }}">Sentiment Analysis</a>
-        <a href="{{ url_for('eda') }}">EDA</a>
+        <div class="navbar-links">
+            <a href="{{ url_for('home') }}">Sentiment Analysis</a>
+            <a href="{{ url_for('eda') }}">EDA</a>
+        </div>
     </div>
-    <div class="container">
+
+    <!-- Sidebar (included only if block is overridden) -->
+    {% block sidebar %}
+    {% endblock %}
+
+    <!-- Main Content -->
+    <div class="content">
         {% block content %}{% endblock %}
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
